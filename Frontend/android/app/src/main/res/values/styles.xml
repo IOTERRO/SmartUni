@@ -1,11 +1,3 @@
-<!--
-  Author / Project Supervisor : Omar Terro
-  GitHub                      : https://github.com/IOTERRO
-  Website                     : https://omarterro.fr
-  Student (FYP)               : Khaled Othman
-  Date                        : 14 October 2026
-  Project                     : SmartUni - Smart University CityU
--->
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is off -->

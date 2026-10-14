@@ -161,6 +161,7 @@ The Flutter **Smart Parking** screen polls Firebase every few seconds so ESP upd
 | [`docs/05_CLOUDFLARE_LOCATIONS_DB.md`](docs/05_CLOUDFLARE_LOCATIONS_DB.md) | Navigation D1 |
 | [`docs/06_CLOUDFLARE_USERS_DB.md`](docs/06_CLOUDFLARE_USERS_DB.md) | Users D1 |
 | [`docs/worker_results_tests.md`](docs/worker_results_tests.md) | Worker API test results |
+| [`docs/07_ANDROID_WIRELESS_ADB.md`](docs/07_ANDROID_WIRELESS_ADB.md) | Run Flutter on a phone over Wi‑Fi ADB |
 
 ---
 
