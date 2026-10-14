@@ -231,20 +231,23 @@ flowchart TD
   Tick -->|yes| Rotate
   Tick -->|no| Dec[secondsLeft - 1]
   Rotate --> QR[QrImageView shows payload.encoded]
-  QR --> Class[Future: classroom scanner app reads QR]
-  Class --> CF[Future: Cloudflare attendance DB]
+  QR --> Class[ClassroomScanner app reads QR]
+  Class --> CF[Cloudflare attendance Worker / D1]
 ```
 
-### 4.7 Future backends (not wired in Step 1)
+### 4.7 Live backends (Step 2 — wired)
 
 ```mermaid
 flowchart TB
-  App[Flutter App]
-  App -->|Navigation locations| CF1[Cloudflare Worker + locations table]
-  App -->|Users login / CRUD| CF2[Cloudflare users table - not ready]
-  App -->|Attendance records| CF3[Cloudflare attendance - not ready]
-  App -->|Parking live slots| FB[Firebase Realtime DB + IoT sensors]
+  App[Flutter Frontend]
+  App -->|Navigation locations| CF1[Cloudflare Navigation Worker + cityu]
+  App -->|Users login| CF2[Cloudflare Users Worker + users D1]
+  App -->|Attendance sessions/records| CF3[Cloudflare Attendance Worker]
+  App -->|Parking live slots| FB[Firebase RTDB + ESP32 parking_node]
+  Scan[ClassroomScanner] -->|POST /api/attendance/scan| CF3
 ```
+
+Details: [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md).
 
 ---
 
@@ -669,9 +672,9 @@ Hero card greets `SessionController.instance.user.displayName`.
 
 Three modules:
 
-- Navigation (Cloudflare)  
-- Attendance (Cloudflare — upcoming)  
-- Parking (Firebase)  
+- Navigation (Cloudflare — live)  
+- Attendance (Cloudflare — live sessions/records; scans via ClassroomScanner)  
+- Parking (Firebase — live from ESP32)  
 
 Logout clears session → welcome.
 
@@ -679,9 +682,9 @@ Logout clears session → welcome.
 
 #### `lib/features/admin/screens/admin_navigation_screen.dart`
 
-**Purpose:** admin view for locations module (design).
+**Purpose:** admin view for locations module.
 
-Shows Worker URL, notes about API key, mock location count, button to open the shared `NavigationScreen`, and “Add location (soon)” placeholder.
+Shows Worker URL, notes about API key, live location count from Cloudflare, button to open the shared `NavigationScreen`.
 
 ---
 

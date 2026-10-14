@@ -8,6 +8,9 @@
 -->
 # Step 1 — Professional structure & design screens
 
+> **Historical Step 1 plan.** Live backends are now wired (Step 2).  
+> Current status: [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md) · Scanner: [`08_CLASSROOM_SCANNER.md`](./08_CLASSROOM_SCANNER.md).
+
 ## Goal
 
 Deliver a **scalable, maintainable Flutter architecture** and **complete UI flows** for Guest / Student / Admin so you can walk through every screen **before** wiring real backend actions.
@@ -18,16 +21,16 @@ Old prototype screens were moved to `Frontend/lib/_legacy/` (reference only).
 
 ## Product decisions locked in this step
 
-| Area | Decision |
-|------|----------|
-| Roles | **Guest** · **Student** · **Admin** (whiteboard) |
-| Guest | **Navigation only** |
-| Student | **Navigation + Attendance QR + Parking** |
-| Admin | Module views for **Navigation / Attendance / Parking** |
-| Navigation backend | Cloudflare Worker + `locations` table |
-| Attendance backend | Cloudflare (table not ready yet). Student shows **rotating personal QR**; classroom uses a **separate scanner app** |
-| Parking backend | **Firebase** (IoT sensors push live occupancy) |
-| Users backend | Cloudflare (not ready yet) → mock login in Step 1 |
+| Area | Decision (Step 1) | Status now (Step 2) |
+|------|-------------------|---------------------|
+| Roles | **Guest** · **Student** · **Admin** | Same |
+| Guest | **Navigation only** | Live Cloudflare locations |
+| Student | **Navigation + Attendance QR + Parking** | Live Workers + Firebase parking |
+| Admin | Module views for **Navigation / Attendance / Parking** | Live sessions/records + IoT parking |
+| Navigation backend | Cloudflare Worker + `locations` | ✅ `CloudflareNavigationRepository` |
+| Attendance backend | Rotating personal QR + separate scanner | ✅ Worker + `ClassroomScanner/` |
+| Parking backend | **Firebase** (IoT) | ✅ `FirebaseParkingRepository` + `iot/parking_node` |
+| Users backend | Mock login in Step 1 | ✅ `CloudflareAuthRepository` |
 
 ---
 

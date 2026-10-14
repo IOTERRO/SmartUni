@@ -9,7 +9,10 @@
 # SmartUni Frontend — How the Actual Code Works (legacy prototype)
 
 > **Status:** historical notes for the **old** `lib/screens` prototype (now in `Frontend/lib/_legacy/`).  
-> **Current Step 1 app:** see [`02_STEP1_DESIGN_ARCHITECTURE.md`](./02_STEP1_DESIGN_ARCHITECTURE.md).
+> **Do not use this file for the current app.**  
+> Current architecture: [`03_CODE_AND_ARCHITECTURE_DETAILED.md`](./03_CODE_AND_ARCHITECTURE_DETAILED.md) ·  
+> Live backends: [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md) ·  
+> Scanner: [`08_CLASSROOM_SCANNER.md`](./08_CLASSROOM_SCANNER.md).
 
 ---
 
