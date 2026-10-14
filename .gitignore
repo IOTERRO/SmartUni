@@ -1,0 +1,44 @@
+# Secrets — never commit
+.env
+.env.*
+**/secrets.dart
+!**/secrets.example.dart
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.iml
+
+# Flutter / Dart
+**/doc/api/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.pub-cache/
+**/.pub/
+**/build/
+**/coverage/
+*.class
+*.log
+*.pyc
+
+# Native build outputs
+**/android/.gradle/
+**/android/local.properties
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/ios/Pods/
+**/ios/.symlinks/
+**/macos/Flutter/ephemeral/
+**/linux/flutter/ephemeral/
+**/windows/flutter/ephemeral/
+
+# Node / Workers local
+**/node_modules/
+**/.wrangler/
+dev.vars
+*.local
