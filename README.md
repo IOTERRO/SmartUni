@@ -175,4 +175,10 @@ The Flutter **Smart Parking** screen polls Firebase every few seconds so ESP upd
 ## License / academic use
 
 Academic Final Year Project — City University.  
-Supervised by **Omar Terro** · Developed by student **Khaled Othman**.
+
+| | |
+|--|--|
+| **Author / Project Supervisor** | **Omar Terro** — [github.com/IOTERRO](https://github.com/IOTERRO) · [omarterro.fr](https://omarterro.fr) |
+| **Student (FYP)** | **Khaled Othman** |
+
+The project is authored and supervised by Omar Terro; Khaled Othman is the FYP student.
