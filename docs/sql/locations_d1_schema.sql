@@ -1,7 +1,9 @@
 -- Author / Project Supervisor : Omar Terro
+-- GitHub                      : https://github.com/IOTERRO
+-- Website                     : https://omarterro.fr
 -- Student (FYP)               : Khaled Othman
 -- Date                        : 14 October 2026
--- Project                     : SmartUni — Smart University CityU
+-- Project                     : SmartUni - Smart University CityU
 -- SmartUni Locations — Cloudflare D1 database: cityu
 -- Your locations table ALREADY EXISTS. Use this file for:
 --   1) optional column upgrades

@@ -1,7 +1,9 @@
 -- Author / Project Supervisor : Omar Terro
+-- GitHub                      : https://github.com/IOTERRO
+-- Website                     : https://omarterro.fr
 -- Student (FYP)               : Khaled Othman
 -- Date                        : 14 October 2026
--- Project                     : SmartUni — Smart University CityU
+-- Project                     : SmartUni - Smart University CityU
 -- Fix location_edges: column names accidentally created with trailing spaces
 -- Run in D1 Console → cityu
 
