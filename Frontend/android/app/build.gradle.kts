@@ -1,3 +1,7 @@
+# Author / Project Supervisor : Omar Terro
+# Student (FYP)               : Khaled Othman
+# Date                        : 14 October 2026
+# Project                     : SmartUni — Smart University CityU
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.

@@ -1,3 +1,7 @@
+/// Author / Project Supervisor : Omar Terro
+/// Student (FYP)               : Khaled Othman
+/// Date                        : 14 October 2026
+/// Project                     : SmartUni — Smart University CityU
 /// Payload encoded inside the student's rotating attendance QR.
 /// Classroom scanner app will read this in a later step.
 class StudentQrPayload {

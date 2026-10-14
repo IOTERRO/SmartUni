@@ -1,4 +1,10 @@
 /*
+ * Author / Project Supervisor : Omar Terro
+ * Student (FYP)               : Khaled Othman
+ * Date                        : 14 October 2026
+ * Project                     : SmartUni — Smart University CityU
+ */
+/*
   SmartUni — ESP32 Parking IoT node
   Publishes 3 ultrasonic bay statuses to Firebase Realtime Database.
 

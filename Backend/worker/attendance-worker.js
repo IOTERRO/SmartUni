@@ -1,4 +1,10 @@
 /**
+ * Author / Project Supervisor : Omar Terro
+ * Student (FYP)               : Khaled Othman
+ * Date                        : 14 October 2026
+ * Project                     : SmartUni — Smart University CityU
+ */
+/**
  * Smart University Worker — Attendance API
  *
  * Cloudflare bindings required:

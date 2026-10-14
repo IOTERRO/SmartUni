@@ -1,3 +1,9 @@
+/*
+ * Author / Project Supervisor : Omar Terro
+ * Student (FYP)               : Khaled Othman
+ * Date                        : 14 October 2026
+ * Project                     : SmartUni — Smart University CityU
+ */
 #ifndef RUNNER_UTILS_H_
 #define RUNNER_UTILS_H_
 

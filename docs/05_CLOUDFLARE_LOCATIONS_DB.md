@@ -1,3 +1,9 @@
+<!--
+  Author / Project Supervisor : Omar Terro
+  Student (FYP)               : Khaled Othman
+  Date                        : 14 October 2026
+  Project                     : SmartUni — Smart University CityU
+-->
 # Cloudflare Locations DB — Architecture alignment
 
 This document describes your **real** D1 navigation database and how it fits the SmartUni Flutter architecture.

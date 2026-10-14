@@ -1,3 +1,9 @@
+<!--
+  Author / Project Supervisor : Omar Terro
+  Student (FYP)               : Khaled Othman
+  Date                        : 14 October 2026
+  Project                     : SmartUni — Smart University CityU
+-->
 # SmartUni Frontend — How the Actual Code Works (legacy prototype)
 
 > **Status:** historical notes for the **old** `lib/screens` prototype (now in `Frontend/lib/_legacy/`).  

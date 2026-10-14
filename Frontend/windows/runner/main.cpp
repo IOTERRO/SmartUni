@@ -1,3 +1,9 @@
+/*
+ * Author / Project Supervisor : Omar Terro
+ * Student (FYP)               : Khaled Othman
+ * Date                        : 14 October 2026
+ * Project                     : SmartUni — Smart University CityU
+ */
 #include <flutter/dart_project.h>
 #include <flutter/flutter_view_controller.h>
 #include <windows.h>

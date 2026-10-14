@@ -1,3 +1,7 @@
+-- Author / Project Supervisor : Omar Terro
+-- Student (FYP)               : Khaled Othman
+-- Date                        : 14 October 2026
+-- Project                     : SmartUni — Smart University CityU
 -- SmartUni Attendance — Cloudflare D1
 -- Run in: Cloudflare Dashboard → D1 → your database → Console
 

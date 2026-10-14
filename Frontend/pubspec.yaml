@@ -1,5 +1,8 @@
 name: smart_university_cityu
-description: "A new Flutter project."
+description: "SmartUni — Smart University CityU. Author/Supervisor: Omar Terro. Student (FYP): Khaled Othman. Date: 14 October 2026."
+# Author / Project Supervisor : Omar Terro
+# Student (FYP)               : Khaled Othman
+# Date                        : 14 October 2026
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

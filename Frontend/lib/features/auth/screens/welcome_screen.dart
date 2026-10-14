@@ -1,7 +1,12 @@
+/// Author / Project Supervisor : Omar Terro
+/// Student (FYP)               : Khaled Othman
+/// Date                        : 14 October 2026
+/// Project                     : SmartUni — Smart University CityU
 import 'package:flutter/material.dart';
 
 import '../../../app/router/app_routes.dart';
 import '../../../app/theme/app_colors.dart';
+import '../../../core/attribution.dart';
 import '../../../core/config/app_config.dart';
 import '../../../core/session/session_controller.dart';
 import '../../../core/widgets/design_mode_banner.dart';
@@ -146,12 +151,14 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 22),
                           Text(
-                            '${AppConfig.appName.toUpperCase()}  •  2027',
+                            Attribution.header,
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.4),
+                              color: Colors.white.withOpacity(0.45),
                               fontSize: 10,
-                              letterSpacing: 1.4,
+                              letterSpacing: 0.2,
                               fontWeight: FontWeight.w600,
+                              height: 1.35,
                             ),
                           ),
                         ],

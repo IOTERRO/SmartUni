@@ -1,5 +1,9 @@
 # SmartUni IoT — Parking Node
 
+**Author / Project Supervisor:** Omar Terro  
+**Student (FYP):** Khaled Othman  
+**Date:** 14 October 2026
+
 ESP32 firmware that reads **three HC-SR04 ultrasonic sensors** and publishes bay occupancy to **Firebase Realtime Database**.
 
 Attendance is **not** handled here (Flutter + Cloudflare attendance Worker).

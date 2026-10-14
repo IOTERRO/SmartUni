@@ -1,3 +1,7 @@
+-- Author / Project Supervisor : Omar Terro
+-- Student (FYP)               : Khaled Othman
+-- Date                        : 14 October 2026
+-- Project                     : SmartUni — Smart University CityU
 -- SmartUni Users — Cloudflare D1 database: users
 -- Worker: users.khaledothman750.workers.dev  (binding DB → users)
 --

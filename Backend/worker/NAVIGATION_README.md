@@ -1,4 +1,10 @@
-﻿# Navigation Worker (Locations)
+<!--
+  Author / Project Supervisor : Omar Terro
+  Student (FYP)               : Khaled Othman
+  Date                        : 14 October 2026
+  Project                     : SmartUni — Smart University CityU
+-->
+# Navigation Worker (Locations)
 
 Paste into Worker **`navigation`**
 

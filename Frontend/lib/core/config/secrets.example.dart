@@ -1,3 +1,7 @@
+/// Author / Project Supervisor : Omar Terro
+/// Student (FYP)               : Khaled Othman
+/// Date                        : 14 October 2026
+/// Project                     : SmartUni — Smart University CityU
 /// Copy this file to `secrets.dart` and fill values locally.
 /// `secrets.dart` is gitignored — never commit real keys.
 ///

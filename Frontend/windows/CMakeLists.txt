@@ -1,3 +1,7 @@
+# Author / Project Supervisor : Omar Terro
+# Student (FYP)               : Khaled Othman
+# Date                        : 14 October 2026
+# Project                     : SmartUni — Smart University CityU
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
 project(smart_university_cityu LANGUAGES CXX)

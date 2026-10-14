@@ -1,4 +1,10 @@
-﻿# Users Worker
+<!--
+  Author / Project Supervisor : Omar Terro
+  Student (FYP)               : Khaled Othman
+  Date                        : 14 October 2026
+  Project                     : SmartUni — Smart University CityU
+-->
+# Users Worker
 
 Source file: **`users-worker.js`**
 

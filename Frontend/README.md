@@ -1,3 +1,9 @@
+<!--
+  Author / Project Supervisor : Omar Terro
+  Student (FYP)               : Khaled Othman
+  Date                        : 14 October 2026
+  Project                     : SmartUni — Smart University CityU
+-->
 # Smart University (CityU) — Flutter app
 
 Step 1: **professional structure + design screens** (mock data / no live backends yet).

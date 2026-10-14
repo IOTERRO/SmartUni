@@ -1,4 +1,10 @@
-﻿# Cloudflare Workers â€” Test Commands & Results
+<!--
+  Author / Project Supervisor : Omar Terro
+  Student (FYP)               : Khaled Othman
+  Date                        : 14 October 2026
+  Project                     : SmartUni — Smart University CityU
+-->
+# Cloudflare Workers â€” Test Commands & Results
 
 This document records the **PowerShell** tests run against the 3 SmartUni Workers  
 (company blocks `curl`, so we use `Invoke-RestMethod`).

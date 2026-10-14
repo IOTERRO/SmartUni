@@ -1,3 +1,9 @@
+<!--
+  Author / Project Supervisor : Omar Terro
+  Student (FYP)               : Khaled Othman
+  Date                        : 14 October 2026
+  Project                     : SmartUni — Smart University CityU
+-->
 # SmartUni Frontend — Complete Code & Architecture Guide
 
 This document explains **every active part** of the Step 1 Flutter app: why the folders exist, how data moves, how screens connect, and what each file does.

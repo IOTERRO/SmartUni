@@ -1,4 +1,10 @@
-﻿# Attendance Worker
+<!--
+  Author / Project Supervisor : Omar Terro
+  Student (FYP)               : Khaled Othman
+  Date                        : 14 October 2026
+  Project                     : SmartUni — Smart University CityU
+-->
+# Attendance Worker
 
 Paste this into Worker **`smart-university`**  
 (because you bound `DB` â†’ **`smart-university-db`** there)
