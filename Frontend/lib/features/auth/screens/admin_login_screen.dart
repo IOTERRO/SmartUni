@@ -143,7 +143,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Design demo: ${AppConstants.demoAdminUsername} / ${AppConstants.demoAdminPassword}',
+                    'D1 account: ${AppConstants.demoAdminUsername} / ${AppConstants.demoAdminPassword}',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: AppColors.textSecondary,

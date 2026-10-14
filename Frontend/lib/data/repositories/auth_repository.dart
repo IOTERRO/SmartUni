@@ -2,7 +2,8 @@ import '../../core/constants/app_constants.dart';
 import '../../core/enums/user_role.dart';
 import '../../core/models/app_user.dart';
 
-/// Contract for authentication. Step 1 uses [MockAuthRepository].
+/// Contract for authentication.
+/// Live: [CloudflareAuthRepository]. Design: [MockAuthRepository].
 abstract class AuthRepository {
   Future<AppUser> loginStudent({
     required String universityId,

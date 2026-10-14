@@ -14,6 +14,18 @@ class CampusLocation {
     this.building,
     this.description,
   });
+
+  /// Maps Navigation Worker `mapLocation` JSON → app model.
+  factory CampusLocation.fromWorkerJson(Map<String, dynamic> json) {
+    return CampusLocation(
+      id: json['id'].toString(),
+      name: (json['name'] as String? ?? '').trim(),
+      type: (json['type'] as String? ?? 'building').trim(),
+      floor: (json['floor'] as num?)?.toInt() ?? 0,
+      building: json['code'] as String?,
+      description: json['description'] as String?,
+    );
+  }
 }
 
 class NavigationRoutePreview {

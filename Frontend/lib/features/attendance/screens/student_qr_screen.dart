@@ -72,7 +72,7 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
               const SectionHeader(
                 title: 'Present this QR in class',
                 subtitle:
-                    'Your code refreshes automatically. The classroom scanner reads it — you do not scan the wall.',
+                    'Your code refreshes automatically. A classroom scanner posts it to the Cloudflare attendance Worker.',
               ),
               const SizedBox(height: 22),
               Container(

@@ -1,107 +1,236 @@
 import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
-import '../../../core/widgets/design_mode_banner.dart';
 import '../../../core/widgets/section_header.dart';
+import '../../../data/remote/worker_api_client.dart';
+import '../../../data/repositories/repository_hub.dart';
 
-/// Admin attendance module — design only until Cloudflare table is ready.
-class AdminAttendanceScreen extends StatelessWidget {
+/// Admin attendance — live sessions/records from the Attendance Worker.
+class AdminAttendanceScreen extends StatefulWidget {
   const AdminAttendanceScreen({super.key});
 
-  static const _sampleRows = [
-    ('STU-202110142', 'Khaled Othman', 'Present', '09:05'),
-    ('STU-202110201', 'Sara Haddad', 'Present', '09:06'),
-    ('STU-202110318', 'Omar Nasser', 'Absent', '—'),
-    ('STU-202110444', 'Maya Farah', 'Present', '09:08'),
-  ];
+  @override
+  State<AdminAttendanceScreen> createState() => _AdminAttendanceScreenState();
+}
+
+class _AdminAttendanceScreenState extends State<AdminAttendanceScreen> {
+  List<Map<String, dynamic>> _sessions = [];
+  List<Map<String, dynamic>> _records = [];
+  String? _sessionId;
+  bool _loadingSessions = true;
+  bool _loadingRecords = false;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSessions();
+  }
+
+  Future<void> _loadSessions() async {
+    setState(() {
+      _loadingSessions = true;
+      _error = null;
+    });
+    try {
+      final sessions =
+          await RepositoryHub.instance.attendance.fetchSessions();
+      if (!mounted) return;
+      setState(() {
+        _sessions = sessions;
+        _sessionId = sessions.isNotEmpty
+            ? sessions.first['id']?.toString()
+            : null;
+        _loadingSessions = false;
+      });
+      if (_sessionId != null) {
+        await _loadRecords(_sessionId!);
+      }
+    } on ApiException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _loadingSessions = false;
+        _error = e.message;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _loadingSessions = false;
+        _error = 'Could not load attendance sessions.';
+      });
+    }
+  }
+
+  Future<void> _loadRecords(String sessionId) async {
+    setState(() {
+      _loadingRecords = true;
+      _error = null;
+      _sessionId = sessionId;
+    });
+    try {
+      final records = await RepositoryHub.instance.attendance.fetchRecords(
+        sessionId: sessionId,
+      );
+      if (!mounted) return;
+      setState(() {
+        _records = records;
+        _loadingRecords = false;
+      });
+    } on ApiException catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _loadingRecords = false;
+        _error = e.message;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _loadingRecords = false;
+        _error = 'Could not load attendance records.';
+      });
+    }
+  }
+
+  String _formatScanTime(Object? raw) {
+    if (raw == null) return '—';
+    final text = raw.toString();
+    if (text.length >= 16) {
+      // 2026-10-13T09:05:00Z → 09:05
+      final t = text.substring(11, 16);
+      return t;
+    }
+    return text;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Admin · Attendance')),
+      appBar: AppBar(
+        title: const Text('Admin · Attendance'),
+        actions: [
+          IconButton(
+            tooltip: 'Refresh',
+            onPressed: _loadingSessions ? null : _loadSessions,
+            icon: const Icon(Icons.refresh_rounded),
+          ),
+        ],
+      ),
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(18, 18, 18, 28),
-          children: [
-            const DesignModeBanner(),
-            const SectionHeader(
-              title: 'Attendance records',
-              subtitle:
-                  'Classroom scanner app → Cloudflare attendance DB. Table not ready yet — sample UI only.',
-            ),
-            const SizedBox(height: 14),
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: const Color(0xFFEEF4FF),
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: const Color(0xFFD7E4FF)),
-              ),
-              child: const Text(
-                'Model: each student shows a rotating QR in the Flutter app. '
-                'A separate classroom device scans it and posts presence to Cloudflare.',
-                style: TextStyle(
-                  fontSize: 12,
-                  height: 1.45,
-                  color: AppColors.textSecondary,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            DropdownButtonFormField<String>(
-              initialValue: 'NET301',
-              decoration: const InputDecoration(labelText: 'Course / session'),
-              items: const [
-                DropdownMenuItem(value: 'NET301', child: Text('NET301 — Smart Networks')),
-                DropdownMenuItem(value: 'CSE210', child: Text('CSE210 — Programming II')),
-              ],
-              onChanged: (_) {},
-            ),
-            const SizedBox(height: 16),
-            ..._sampleRows.map((row) {
-              final present = row.$3 == 'Present';
-              return Card(
-                margin: const EdgeInsets.only(bottom: 10),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: (present ? AppColors.success : AppColors.danger)
-                        .withOpacity(0.12),
-                    child: Icon(
-                      present ? Icons.check_rounded : Icons.close_rounded,
-                      color: present ? AppColors.success : AppColors.danger,
-                    ),
+        child: _loadingSessions
+            ? const Center(child: CircularProgressIndicator())
+            : ListView(
+                padding: const EdgeInsets.fromLTRB(18, 18, 18, 28),
+                children: [
+                  const SectionHeader(
+                    title: 'Attendance records',
+                    subtitle:
+                        'Live data from Cloudflare (smart-university-db).',
                   ),
-                  title: Text(row.$2, style: const TextStyle(fontWeight: FontWeight.w700)),
-                  subtitle: Text(row.$1),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        row.$3,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color: present ? AppColors.success : AppColors.danger,
+                  const SizedBox(height: 14),
+                  if (_error != null)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Text(
+                        _error!,
+                        style: const TextStyle(
+                          color: AppColors.danger,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(row.$4, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary)),
-                    ],
-                  ),
-                ),
-              );
-            }),
-            const SizedBox(height: 8),
-            OutlinedButton.icon(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Export / live sync comes after attendance DB is ready.')),
-                );
-              },
-              icon: const Icon(Icons.download_outlined),
-              label: const Text('Export sheet (soon)'),
-            ),
-          ],
-        ),
+                    ),
+                  if (_sessions.isEmpty)
+                    const Text('No attendance sessions found in D1.')
+                  else ...[
+                    DropdownButtonFormField<String>(
+                      key: ValueKey(_sessionId),
+                      initialValue: _sessionId,
+                      decoration:
+                          const InputDecoration(labelText: 'Session'),
+                      items: _sessions
+                          .map(
+                            (s) => DropdownMenuItem(
+                              value: s['id']?.toString(),
+                              child: Text(
+                                '${s['course_id'] ?? ''} · ${s['session_date'] ?? ''} ${s['start_time'] ?? ''}'
+                                    .trim(),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (v) {
+                        if (v != null) _loadRecords(v);
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    if (_loadingRecords)
+                      const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(24),
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    else if (_records.isEmpty)
+                      const Text('No records for this session.')
+                    else
+                      ..._records.map((row) {
+                        final status =
+                            (row['status'] as String? ?? 'Absent').trim();
+                        final present = status.toLowerCase() == 'present';
+                        final name =
+                            row['student_name']?.toString() ?? 'Student';
+                        final sid =
+                            row['student_id']?.toString() ?? '';
+                        return Card(
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor:
+                                  (present ? AppColors.success : AppColors.danger)
+                                      .withOpacity(0.12),
+                              child: Icon(
+                                present
+                                    ? Icons.check_rounded
+                                    : Icons.close_rounded,
+                                color: present
+                                    ? AppColors.success
+                                    : AppColors.danger,
+                              ),
+                            ),
+                            title: Text(
+                              name,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w700),
+                            ),
+                            subtitle: Text(sid),
+                            trailing: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  status,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: present
+                                        ? AppColors.success
+                                        : AppColors.danger,
+                                  ),
+                                ),
+                                Text(
+                                  _formatScanTime(row['scanned_at']),
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                  ],
+                ],
+              ),
       ),
     );
   }

@@ -23,8 +23,11 @@ class AppConfig {
   /// Firebase will host live parking IoT sensor state (Step 2+).
   static const bool parkingUsesFirebase = true;
 
-  /// Step 1 = design / mock session only.
-  static const bool designMode = true;
+  /// When true, auth + navigation use Cloudflare Workers (not mock data).
+  static const bool useCloudflareApis = true;
+
+  /// Step 1 design banner. Off for Step 2 live Cloudflare wiring.
+  static const bool designMode = false;
 
   /// How often the student attendance QR rotates in the UI (design preview).
   static const Duration studentQrRefreshInterval = Duration(seconds: 20);

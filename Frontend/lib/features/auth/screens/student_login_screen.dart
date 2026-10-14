@@ -133,7 +133,7 @@ class _StudentLoginScreenState extends State<StudentLoginScreen> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Design demo: ${AppConstants.demoStudentId} / ${AppConstants.demoStudentPassword}',
+                    'D1 account: ${AppConstants.demoStudentId} / ${AppConstants.demoStudentPassword}',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: AppColors.textSecondary,

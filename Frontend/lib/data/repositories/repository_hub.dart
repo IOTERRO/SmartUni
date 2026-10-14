@@ -1,9 +1,12 @@
+import '../../core/config/app_config.dart';
 import 'attendance_repository.dart';
 import 'auth_repository.dart';
+import 'cloudflare_auth_repository.dart';
+import 'cloudflare_navigation_repository.dart';
 import 'navigation_repository.dart';
 import 'parking_repository.dart';
 
-/// Central place to swap mock → real implementations later.
+/// Central place to swap mock → real implementations.
 class RepositoryHub {
   RepositoryHub._({
     required this.auth,
@@ -18,9 +21,17 @@ class RepositoryHub {
   final AttendanceRepository attendance;
 
   static final RepositoryHub instance = RepositoryHub._(
-    auth: MockAuthRepository(),
-    navigation: MockNavigationRepository(),
+    auth: AppConfig.useCloudflareApis
+        ? CloudflareAuthRepository()
+        : MockAuthRepository(),
+    navigation: AppConfig.useCloudflareApis
+        ? CloudflareNavigationRepository()
+        : MockNavigationRepository(),
+    // Parking stays mock until Firebase IoT wiring.
     parking: MockParkingRepository(),
-    attendance: MockAttendanceRepository(),
+    // QR is local; sessions/records come from the Attendance Worker.
+    attendance: AppConfig.useCloudflareApis
+        ? CloudflareAttendanceRepository()
+        : MockAttendanceRepository(),
   );
 }

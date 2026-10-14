@@ -26,6 +26,24 @@ class AppUser {
     );
   }
 
+  /// Maps Users Worker `publicUser` JSON → app model.
+  factory AppUser.fromWorkerJson(Map<String, dynamic> json) {
+    final roleRaw = (json['role'] as String? ?? 'student').toLowerCase();
+    final role = roleRaw == 'admin' ? UserRole.admin : UserRole.student;
+    final username = (json['username'] as String? ?? '').trim();
+    final fullName = (json['full_name'] as String?)?.trim();
+
+    return AppUser(
+      id: json['id'].toString(),
+      displayName:
+          (fullName != null && fullName.isNotEmpty) ? fullName : username,
+      identifier: username,
+      role: role,
+      faculty: json['faculty'] as String?,
+      email: json['email'] as String?,
+    );
+  }
+
   AppUser copyWith({
     String? id,
     String? displayName,

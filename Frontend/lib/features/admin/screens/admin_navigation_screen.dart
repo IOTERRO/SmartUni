@@ -41,10 +41,12 @@ class AdminNavigationScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 final count = snapshot.data?.length ?? 0;
                 return _MetaCard(
-                  title: 'Locations (mock preview)',
+                  title: 'Locations (live)',
                   value: snapshot.connectionState == ConnectionState.waiting
                       ? 'Loading…'
-                      : '$count sample records shown in directory',
+                      : snapshot.hasError
+                          ? 'Failed to load'
+                          : '$count records from Cloudflare',
                   icon: Icons.place_outlined,
                 );
               },
