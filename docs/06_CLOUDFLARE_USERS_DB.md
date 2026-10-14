@@ -133,7 +133,9 @@ Legacy still accepted: `{ "username", "password", "isAdmin": 0 }`
 | `faculty` | `faculty` |
 | `email` | `email` |
 
-Replace `MockAuthRepository` with a Cloudflare users repository calling this Worker.
+**Step 2 done:** `CloudflareAuthRepository` calls `POST /api/login` when `AppConfig.useCloudflareApis` is true.  
+`ClassroomScanner` also uses the same Users Worker for admin login.  
+See [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md).
 
 ---
 
@@ -141,8 +143,7 @@ Replace `MockAuthRepository` with a Cloudflare users repository calling this Wor
 
 - [x] Worker `users` created  
 - [x] Binding `DB` → D1 `users`  
-- [ ] Secret `API_KEY` set  
-- [ ] Paste `Backend/worker/users-worker.js` → Save and Deploy  
-- [ ] Run `docs/sql/users_d1_schema.sql` (or migrate old `isAdmin` table)  
-- [ ] Seed `student/student` and `admin/admin`  
-- [ ] Later: wire Flutter login to `POST /api/login`  
+- [x] Secret `API_KEY` set  
+- [x] Deploy `Backend/worker/users-worker.js`  
+- [x] Schema / seed `student/student` and `admin/admin`  
+- [x] Wire Flutter login to `POST /api/login` (`CloudflareAuthRepository`)  

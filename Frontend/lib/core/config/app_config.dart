@@ -38,7 +38,7 @@ class AppConfig {
   /// Parking is live from Firebase + ESP32 sensors.
   static const bool parkingUsesFirebase = true;
 
-  /// When true, auth + navigation use Cloudflare Workers (not mock data).
+  /// When true, auth + navigation + attendance use Cloudflare Workers (not mocks).
   static const bool useCloudflareApis = true;
 
   /// Step 1 design banner. Off for Step 2 live Cloudflare wiring.

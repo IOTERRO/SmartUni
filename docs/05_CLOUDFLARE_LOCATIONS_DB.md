@@ -273,19 +273,20 @@ Attendance Admin uses **different tables** in the same or another D1 DB — see 
 ### Next (recommended)
 - [ ] Fill latitude/longitude for all rows  
 - [ ] Add `type`, `floor`, `is_active` columns  
-- [ ] Create `location_edges` + sample distances  
-- [ ] Confirm Worker is bound to D1 `cityu` as `DB`  
-- [ ] Step 2: implement `CloudflareNavigationRepository` in Flutter  
+- [x] Create `location_edges` + sample distances (as used by Navigation Worker)  
+- [x] Confirm Worker is bound to D1 `cityu` as `DB`  
+- [x] Step 2: `CloudflareNavigationRepository` wired in Flutter (`AppConfig.useCloudflareApis`)  
+
+See [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md).
 
 ---
 
 ## 9. Quick mental model
 
 ```text
-locations        = places on campus (what you already built) ✅
-location_edges   = walkable links between places             ⬜
-Worker API       = secure door from Flutter → D1             (partially ready)
-Flutter Nav UI   = already designed; still on mock data      (Step 1)
+locations        = places on campus                              ✅
+location_edges   = walkable links between places                 ✅ (Worker route API)
+Worker API       = secure door from Flutter → D1                 ✅
+Flutter Nav UI   = live via CloudflareNavigationRepository       ✅ Step 2
 ```
 
-Your current `locations` table is **coherent** with the architecture. Complete coordinates + add `location_edges`, then we wire the Flutter repository in the next implementation step.

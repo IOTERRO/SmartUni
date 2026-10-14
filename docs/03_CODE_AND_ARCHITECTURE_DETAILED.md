@@ -8,10 +8,14 @@
 -->
 # SmartUni Frontend — Complete Code & Architecture Guide
 
-This document explains **every active part** of the Step 1 Flutter app: why the folders exist, how data moves, how screens connect, and what each file does.
+This document explains **every active part** of the SmartUni Flutter app: why the folders exist, how data moves, how screens connect, and what each file does.
 
 > **Active code:** everything under `Frontend/lib/` except `lib/_legacy/`  
 > **Legacy folder:** old prototype screens — **not used** by `main.dart`. Ignore it while learning the new architecture.
+>
+> **Step 2 status (live backends):** Auth, navigation, and attendance now use **Cloudflare Workers**; parking uses **Firebase + ESP32**.  
+> See [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md) for the mock → live migration, new files (`WorkerApiClient`, `Cloudflare*`, `FirebaseParkingRepository`), and the separate [`ClassroomScanner`](./08_CLASSROOM_SCANNER.md) app.  
+> Sections below still teach the folder layout and repository pattern; treat “mock only” wording as **historical Step 1** unless section 8 says otherwise.
 
 ---
 
@@ -24,7 +28,7 @@ This document explains **every active part** of the Step 1 Flutter app: why the 
 5. [Core concepts (OOP patterns used)](#5-core-concepts-oop-patterns-used)
 6. [File-by-file explanation](#6-file-by-file-explanation)
 7. [How a button click travels through the code](#7-how-a-button-click-travels-through-the-code)
-8. [What is mock vs real (Step 1)](#8-what-is-mock-vs-real-step-1)
+8. [What is mock vs real (Step 1 → Step 2)](#8-what-is-mock-vs-real-step-1--step-2)
 9. [Glossary](#9-glossary)
 
 ---
@@ -41,9 +45,8 @@ Smart University is a **Flutter mobile/web app** for City University (Abi Samra)
 | Student | Student login | Navigation + Attendance QR + Parking + Profile |
 | Admin | Admin login | Module screens for Navigation / Attendance / Parking |
 
-**Step 1 goal:** professional structure + beautiful screens you can click through.  
-**Data today:** fake (mock) data inside the app.  
-**Later steps:** replace mocks with Cloudflare (navigation, users, attendance) and Firebase (parking IoT).
+**Step 1 goal:** professional structure + screens you can click through on mocks.  
+**Step 2 (current):** same structure, **live** Cloudflare Workers + Firebase parking; classroom QR reading is a **second app** (`ClassroomScanner/`).
 
 ---
 
@@ -791,18 +794,22 @@ They are **not imported** by `main.dart`. Kept only as history/reference.
 
 ---
 
-## 8. What is mock vs real (Step 1)
+## 8. What is mock vs real (Step 1 → Step 2)
 
-| Piece | Step 1 (now) | Later |
-|-------|--------------|-------|
-| Student/Admin login | MockAuthRepository | Cloudflare users table |
-| Locations / routes | MockData | Cloudflare Worker `locations` |
-| Parking slots | MockData | Firebase + IoT sensors |
-| Attendance QR | Local random token UI | Signed token + classroom scanner → Cloudflare |
-| Admin CRUD users/tables | Design placeholders | Real add/get/delete APIs |
-| Session persistence | RAM only | SharedPreferences / secure storage |
+| Piece | Step 1 (design) | Step 2 (current defaults) |
+|-------|-----------------|---------------------------|
+| Student/Admin login | `MockAuthRepository` | `CloudflareAuthRepository` → Users Worker |
+| Locations / routes | `MockData` | `CloudflareNavigationRepository` → Navigation Worker |
+| Parking slots | `MockData` | `FirebaseParkingRepository` ← ESP32 `iot/parking_node` |
+| Attendance sessions / records | Empty mock | `CloudflareAttendanceRepository` → Attendance Worker |
+| Student QR | Local rotating token | Still generated on-device (`SMARTUNI\|…`); scanned by **ClassroomScanner** |
+| Classroom scanner | Not built | Separate Flutter app — [`08_CLASSROOM_SCANNER.md`](./08_CLASSROOM_SCANNER.md) |
+| Admin CRUD users/tables | Design placeholders | Partial live reads; full CRUD still evolving |
+| Session persistence | RAM only | Still RAM (`SessionController`) |
+| Design banners | On | Off (`AppConfig.designMode = false`) |
 
-Yellow banners (`DesignModeBanner`) remind you the screen is a preview.
+Switching is done in `RepositoryHub` via `AppConfig.useCloudflareApis` / `parkingUsesFirebase`.  
+Full migration notes: [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md).
 
 ---
 
@@ -831,12 +838,15 @@ Yellow banners (`DesignModeBanner`) remind you the screen is a preview.
 4. **Features** are the screens users see.  
 5. **SessionController** remembers the role/user.  
 6. **RepositoryHub** is the only door to data.  
-7. **Mocks** feed the UI until Cloudflare/Firebase are connected.  
+7. **Step 2:** Cloudflare / Firebase implementations feed the UI (`WorkerApiClient` + live repos); mocks remain as fallbacks.  
+8. **ClassroomScanner** is a separate app that posts QR scans to the Attendance Worker.
 
-If you can explain those 7 lines out loud, you understand the architecture.
+If you can explain those lines out loud, you understand the architecture.
 
 ---
 
 *Related docs:*  
+- [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md) — mock → live Cloudflare/Firebase  
+- [`08_CLASSROOM_SCANNER.md`](./08_CLASSROOM_SCANNER.md) — classroom QR reader app  
 - [`02_STEP1_DESIGN_ARCHITECTURE.md`](./02_STEP1_DESIGN_ARCHITECTURE.md) — Step 1 goals & demo logins  
 - [`01_FRONTEND_CODE_UNDERSTANDING.md`](./01_FRONTEND_CODE_UNDERSTANDING.md) — old prototype notes (legacy)

@@ -255,6 +255,8 @@ The **3-table design** is better long-term (cleaner Admin dropdown + sessions). 
 - [ ] Run `CREATE TABLE` SQL
 - [ ] Insert sample courses / session / records
 - [ ] Bind D1 to Worker as `DB`
-- [ ] Later: add Worker routes `GET /api/attendance`, `POST /api/attendance/scan`
+- [x] Worker routes: sessions / records / `POST /api/attendance/scan`  
+- [x] Flutter: `CloudflareAttendanceRepository` + `ClassroomScanner/` reader app  
+  (see [`08_CLASSROOM_SCANNER.md`](./08_CLASSROOM_SCANNER.md), [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md))
 
 You do **not** need to wire the Flutter app yet — create the tables first, then we connect them in the next step.

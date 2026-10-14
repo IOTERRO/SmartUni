@@ -76,7 +76,7 @@ class AdminHomeScreen extends StatelessWidget {
               const SizedBox(height: 12),
               ServiceCard(
                 title: 'Attendance',
-                subtitle: 'Student presence records (Cloudflare — upcoming).',
+                subtitle: 'Sessions & records (Cloudflare) + classroom QR scanner.',
                 icon: Icons.fact_check_outlined,
                 accent: AppColors.attendanceAccent,
                 tag: 'CLOUDFLARE',

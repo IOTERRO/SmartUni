@@ -42,18 +42,23 @@ See also [`AUTHORS.md`](AUTHORS.md).
 
 ## System overview
 
-```
+`
 ┌─────────────────┐     X-API-Key      ┌──────────────────────────┐
-│  Flutter app    │ ─────────────────► │ Cloudflare Workers       │
-│  (Guest/Student │                    │  • users      → D1 users │
-│   /Admin)       │                    │  • navigation → D1 cityu │
-│                 │                    │  • attendance → D1 smart │
-│                 │     Auth + REST    │    -university-db        │
-│                 │ ◄───────────────── │                          │
-│                 │                    └──────────────────────────┘
-│                 │
-│                 │     idToken + GET  ┌──────────────────────────┐
-│                 │ ─────────────────► │ Firebase Realtime DB     │
+│ Frontend Flutter│ ─────────────────► │ Cloudflare Workers       │
+│ Guest/Student/  │                    │  • users      → D1 users │
+│ Admin           │     Auth + REST    │  • navigation → D1 cityu │
+│  • shows QR     │ ◄───────────────── │  • attendance → D1 smart │
+└────────┬────────┘                    │    -university-db        │
+         │ student QR                  └────────────▲─────────────┘
+         │ SMARTUNI|SID|TOK|EXP                     │
+         ▼                                          │ POST /scan
+┌─────────────────┐     X-API-Key                   │
+│ ClassroomScanner│ ────────────────────────────────┘
+│ (laptop/phone)  │  admin login → session → camera
+└─────────────────┘
+
+┌─────────────────┐     idToken + GET  ┌──────────────────────────┐
+│ Frontend parking│ ─────────────────► │ Firebase Realtime DB     │
 │                 │ ◄───────────────── │ /SmartUniversity/Parking │
 └─────────────────┘                    └────────────▲─────────────┘
                                                     │ Wi-Fi + JSON
@@ -61,7 +66,7 @@ See also [`AUTHORS.md`](AUTHORS.md).
                                        │ ESP32 parking_node       │
                                        │ 3× HC-SR04 (P1/P2/P3)    │
                                        └──────────────────────────┘
-```
+`
 
 ### Backend choices
 
@@ -82,11 +87,28 @@ Attendance is **not** handled by Arduino/IoT anymore — only parking is.
 SmartUni/
 ├── AUTHORS.md                 # Supervisor & student credits
 ├── README.md                  # This file
-├── Frontend/                  # Flutter application (roles, UI, repos)
+├── Frontend/                  # Flutter app (guest / student / admin)
+├── ClassroomScanner/          # Flutter classroom QR reader (admin device)
 ├── Backend/worker/            # Cloudflare Workers (users, navigation, attendance)
 ├── iot/parking_node/          # ESP32 firmware → Firebase parking
 └── docs/                      # Architecture notes, D1 SQL, Worker test results
 ```
+
+### Classroom scanner (`ClassroomScanner/`)
+
+Dedicated **reader** app (separate from SmartUni) for the classroom laptop or phone:
+
+1. Admin signs in (Users Worker)  
+2. Picks an attendance session (Attendance Worker)  
+3. Scans student `SMARTUNI|…` QRs → `POST /api/attendance/scan`  
+4. Plays success / fail beeps  
+
+Typical demo: **phone = SmartUni student QR**, **Chrome on laptop = scanner** (`flutter run -d chrome --web-port=8091`).
+
+| Doc | Content |
+|-----|---------|
+| [`ClassroomScanner/README.md`](ClassroomScanner/README.md) | Setup |
+| [`docs/08_CLASSROOM_SCANNER.md`](docs/08_CLASSROOM_SCANNER.md) | Full flow, APIs, schema notes, troubleshooting |
 
 ---
 
@@ -96,10 +118,12 @@ Professional structure:
 
 - `lib/app/` — theme, router, root widget  
 - `lib/core/` — config, models, session, shared widgets, attribution  
-- `lib/data/repositories/` — contracts + Cloudflare / Firebase implementations  
+- `lib/data/remote/worker_api_client.dart` — shared HTTP + `X-API-Key` for Workers  
+- `lib/data/repositories/` — contracts + `Cloudflare*` / `FirebaseParking` / mock fallbacks  
 - `lib/features/` — auth, guest, student, admin, navigation, attendance, parking  
 
-`RepositoryHub` switches live backends on via `AppConfig` (`useCloudflareApis`, `parkingUsesFirebase`).
+`RepositoryHub` selects live backends via `AppConfig` (`useCloudflareApis`, `parkingUsesFirebase`).  
+Migration from Step 1 mocks: [`docs/09_STEP2_LIVE_BACKENDS.md`](docs/09_STEP2_LIVE_BACKENDS.md).
 
 ### Run locally
 
@@ -156,7 +180,9 @@ The Flutter **Smart Parking** screen polls Firebase every few seconds so ESP upd
 | Doc | Content |
 |-----|---------|
 | [`docs/02_STEP1_DESIGN_ARCHITECTURE.md`](docs/02_STEP1_DESIGN_ARCHITECTURE.md) | Step 1 UI / architecture |
-| [`docs/03_CODE_AND_ARCHITECTURE_DETAILED.md`](docs/03_CODE_AND_ARCHITECTURE_DETAILED.md) | Deep dive on Flutter structure |
+| [`docs/03_CODE_AND_ARCHITECTURE_DETAILED.md`](docs/03_CODE_AND_ARCHITECTURE_DETAILED.md) | Flutter folder / repository deep dive |
+| [`docs/09_STEP2_LIVE_BACKENDS.md`](docs/09_STEP2_LIVE_BACKENDS.md) | **Mock → live Cloudflare/Firebase** (new files, flags) |
+| [`docs/08_CLASSROOM_SCANNER.md`](docs/08_CLASSROOM_SCANNER.md) | **Classroom QR reader** app (detailed) |
 | [`docs/04_CLOUDFLARE_ATTENDANCE_DB.md`](docs/04_CLOUDFLARE_ATTENDANCE_DB.md) | Attendance D1 |
 | [`docs/05_CLOUDFLARE_LOCATIONS_DB.md`](docs/05_CLOUDFLARE_LOCATIONS_DB.md) | Navigation D1 |
 | [`docs/06_CLOUDFLARE_USERS_DB.md`](docs/06_CLOUDFLARE_USERS_DB.md) | Users D1 |
@@ -167,7 +193,7 @@ The Flutter **Smart Parking** screen polls Firebase every few seconds so ESP upd
 
 ## Security notes
 
-- Never commit `Frontend/lib/core/config/secrets.dart` or `iot/parking_node/Config.h`  
+- Never commit `Frontend/lib/core/config/secrets.dart`, `ClassroomScanner/lib/core/config/secrets.dart`, or `iot/parking_node/Config.h`  
 - Use the `*.example` templates and fill secrets locally / in Cloudflare  
 - Rotate any keys or tokens that were shared in chat or screenshots  
 
