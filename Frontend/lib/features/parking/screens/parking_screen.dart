@@ -4,6 +4,8 @@
 /// Student (FYP)               : Khaled Othman
 /// Date                        : 14 October 2026
 /// Project                     : SmartUni - Smart University CityU
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
@@ -25,24 +27,38 @@ class _ParkingScreenState extends State<ParkingScreen> {
   ParkingSummary? _summary;
   bool _loading = true;
   String? _error;
+  Timer? _pollTimer;
 
   @override
   void initState() {
     super.initState();
-    _load();
+    _load(showSpinner: true);
+    _pollTimer = Timer.periodic(
+      AppConfig.parkingRefreshInterval,
+      (_) => _load(showSpinner: false),
+    );
   }
 
-  Future<void> _load() async {
-    setState(() {
-      _loading = true;
-      _error = null;
-    });
+  @override
+  void dispose() {
+    _pollTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _load({bool showSpinner = true}) async {
+    if (showSpinner && mounted) {
+      setState(() {
+        _loading = true;
+        _error = null;
+      });
+    }
     try {
       final data = await RepositoryHub.instance.parking.fetchSummary();
       if (!mounted) return;
       setState(() {
         _summary = data;
         _loading = false;
+        _error = null;
       });
     } on ApiException catch (e) {
       if (!mounted) return;
@@ -69,7 +85,7 @@ class _ParkingScreenState extends State<ParkingScreen> {
         actions: [
           IconButton(
             tooltip: 'Refresh',
-            onPressed: _loading ? null : _load,
+            onPressed: _loading ? null : () => _load(showSpinner: true),
             icon: const Icon(Icons.refresh_rounded),
           ),
         ],

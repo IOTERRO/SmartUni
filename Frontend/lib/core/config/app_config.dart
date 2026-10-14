@@ -46,4 +46,7 @@ class AppConfig {
 
   /// How often the student attendance QR rotates in the UI (design preview).
   static const Duration studentQrRefreshInterval = Duration(seconds: 20);
+
+  /// How often the parking screen re-reads Firebase (ESP publishes ~every 10s).
+  static const Duration parkingRefreshInterval = Duration(seconds: 5);
 }
