@@ -42,7 +42,7 @@ See also [`AUTHORS.md`](AUTHORS.md).
 
 ## System overview
 
-`
+```
 ┌─────────────────┐     X-API-Key      ┌──────────────────────────┐
 │ Frontend Flutter│ ─────────────────► │ Cloudflare Workers       │
 │ Guest/Student/  │                    │  • users      → D1 users │
@@ -66,7 +66,7 @@ See also [`AUTHORS.md`](AUTHORS.md).
                                        │ ESP32 parking_node       │
                                        │ 3× HC-SR04 (P1/P2/P3)    │
                                        └──────────────────────────┘
-`
+```
 
 ### Backend choices
 
