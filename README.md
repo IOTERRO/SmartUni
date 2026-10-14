@@ -180,5 +180,3 @@ Academic Final Year Project — City University.
 |--|--|
 | **Author / Project Supervisor** | **Omar Terro** — [github.com/IOTERRO](https://github.com/IOTERRO) · [omarterro.fr](https://omarterro.fr) |
 | **Student (FYP)** | **Khaled Othman** |
-
-The project is authored and supervised by Omar Terro; Khaled Othman is the FYP student.
