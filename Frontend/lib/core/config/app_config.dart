@@ -20,7 +20,16 @@ class AppConfig {
   static const String attendanceWorkerUrl =
       'https://smart-university.khaledothman750.workers.dev';
 
-  /// Firebase will host live parking IoT sensor state (Step 2+).
+  /// Firebase Realtime Database project for parking IoT.
+  static const String firebaseProjectId = 'smart-uni-a86c1';
+  static const String firebaseDatabaseUrl =
+      'https://smart-uni-a86c1-default-rtdb.europe-west1.firebasedatabase.app';
+  static const String firebaseAuthDomain = 'smart-uni-a86c1.firebaseapp.com';
+
+  /// RTDB path written by `iot/parking_node`.
+  static const String firebaseParkingPath = 'SmartUniversity/Parking';
+
+  /// Parking is live from Firebase + ESP32 sensors.
   static const bool parkingUsesFirebase = true;
 
   /// When true, auth + navigation use Cloudflare Workers (not mock data).

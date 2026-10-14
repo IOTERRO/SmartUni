@@ -3,6 +3,10 @@
 .env.*
 **/secrets.dart
 !**/secrets.example.dart
+iot/parking_node/Config.h
+
+# IoT local / tooling leftovers
+**/python/logs/
 
 # OS / editor
 .DS_Store

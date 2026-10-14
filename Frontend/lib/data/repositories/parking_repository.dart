@@ -2,7 +2,7 @@ import '../../core/models/parking_slot.dart';
 import '../mock/mock_data.dart';
 
 /// Parking data access.
-/// Step 1: mock. Later: Firebase Realtime DB fed by IoT sensors.
+/// Live: [FirebaseParkingRepository]. Fallback: [MockParkingRepository].
 abstract class ParkingRepository {
   Future<ParkingSummary> fetchSummary();
 }

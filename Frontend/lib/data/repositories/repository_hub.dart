@@ -3,6 +3,7 @@ import 'attendance_repository.dart';
 import 'auth_repository.dart';
 import 'cloudflare_auth_repository.dart';
 import 'cloudflare_navigation_repository.dart';
+import 'firebase_parking_repository.dart';
 import 'navigation_repository.dart';
 import 'parking_repository.dart';
 
@@ -27,9 +28,9 @@ class RepositoryHub {
     navigation: AppConfig.useCloudflareApis
         ? CloudflareNavigationRepository()
         : MockNavigationRepository(),
-    // Parking stays mock until Firebase IoT wiring.
-    parking: MockParkingRepository(),
-    // QR is local; sessions/records come from the Attendance Worker.
+    parking: AppConfig.parkingUsesFirebase
+        ? FirebaseParkingRepository()
+        : MockParkingRepository(),
     attendance: AppConfig.useCloudflareApis
         ? CloudflareAttendanceRepository()
         : MockAttendanceRepository(),

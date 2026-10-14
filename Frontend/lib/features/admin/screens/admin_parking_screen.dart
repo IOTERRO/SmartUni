@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
-import '../../../core/widgets/design_mode_banner.dart';
+import '../../../core/config/app_config.dart';
 import '../../../core/widgets/section_header.dart';
 import '../../parking/screens/parking_screen.dart';
 
@@ -16,10 +16,10 @@ class AdminParkingScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(18, 18, 18, 28),
           children: [
-            const DesignModeBanner(),
             const SectionHeader(
               title: 'Parking IoT module',
-              subtitle: 'Sensors push occupancy to Firebase; admin monitors from here.',
+              subtitle:
+                  'ESP32 ultrasonic node (`iot/parking_node`) → Firebase → Flutter.',
             ),
             const SizedBox(height: 14),
             Container(
@@ -29,20 +29,20 @@ class AdminParkingScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: AppColors.border),
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Architecture choice',
+                  const Text(
+                    'Live architecture',
                     style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
-                    '• Ultrasonic / ESP32 sensors on parking spots\n'
-                    '• Push live state to Firebase Realtime Database\n'
-                    '• Flutter reads Firebase for student + admin views\n'
-                    '• Cloudflare remains for navigation / users / attendance',
-                    style: TextStyle(
+                    '• 3× HC-SR04 on ESP32 (P1 Front, P2 Left, P3 Right)\n'
+                    '• Push occupancy to Firebase RTDB\n'
+                    '• Path: ${AppConfig.firebaseParkingPath}\n'
+                    '• Attendance stays on Cloudflare (app QR) — not IoT',
+                    style: const TextStyle(
                       color: AppColors.textSecondary,
                       height: 1.5,
                       fontSize: 13,
@@ -60,22 +60,10 @@ class AdminParkingScreen extends StatelessWidget {
                 );
               },
               icon: const Icon(Icons.local_parking_rounded),
-              label: const Text('Open parking preview'),
+              label: const Text('Open live parking'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.parkingAccent,
               ),
-            ),
-            const SizedBox(height: 12),
-            OutlinedButton.icon(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Firebase project binding comes in a later step.'),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.link_rounded),
-              label: const Text('Connect Firebase (soon)'),
             ),
           ],
         ),

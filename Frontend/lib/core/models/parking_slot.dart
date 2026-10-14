@@ -12,6 +12,20 @@ class ParkingSlot {
     this.zone,
     this.updatedAt,
   });
+
+  /// Maps ESP / Firebase RTDB spot JSON → app model.
+  factory ParkingSlot.fromFirebaseJson(String key, Map<String, dynamic> json) {
+    final id = (json['spot_id'] ?? key).toString();
+    final label = (json['label'] as String?)?.trim();
+    final status = (json['status'] as String? ?? '').toLowerCase();
+    return ParkingSlot(
+      id: id,
+      code: (label != null && label.isNotEmpty) ? '$id · $label' : id,
+      isOccupied: status == 'occupied',
+      zone: 'Lot A',
+      updatedAt: DateTime.now(),
+    );
+  }
 }
 
 class ParkingSummary {
