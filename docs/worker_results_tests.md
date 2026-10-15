@@ -609,4 +609,4 @@ Invoke-RestMethod "https://smart-university.khaledothman750.workers.dev/api/atte
 | navigation | OK | locations + search + route | Yes |
 | attendance (`smart-university`) | OK | courses + sessions + records + scan | Yes |
 
-**Status update:** Step 2 is done in the Flutter apps — `RepositoryHub` uses `Cloudflare*Repository` + `WorkerApiClient`, parking uses `FirebaseParkingRepository`, and `ClassroomScanner/` posts to `/api/attendance/scan`. See [`09_STEP2_LIVE_BACKENDS.md`](./09_STEP2_LIVE_BACKENDS.md) and [`08_CLASSROOM_SCANNER.md`](./08_CLASSROOM_SCANNER.md).
+**Status update:** Flutter apps use live Cloudflare + Firebase; `ClassroomScanner/` posts to `/api/attendance/scan`. See [`ARCHITECTURE_DETAILED.md`](./ARCHITECTURE_DETAILED.md) and [`OVERVIEW.md`](./OVERVIEW.md).

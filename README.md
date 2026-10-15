@@ -108,7 +108,7 @@ Typical demo: **phone = SmartUni student QR**, **Chrome on laptop = scanner** (`
 | Doc | Content |
 |-----|---------|
 | [`ClassroomScanner/README.md`](ClassroomScanner/README.md) | Setup |
-| [`docs/08_CLASSROOM_SCANNER.md`](docs/08_CLASSROOM_SCANNER.md) | Full flow, APIs, schema notes, troubleshooting |
+| [`docs/ARCHITECTURE_DETAILED.md`](docs/ARCHITECTURE_DETAILED.md) | Scanner + full system deep dive |
 
 ---
 
@@ -123,7 +123,8 @@ Professional structure:
 - `lib/features/` — auth, guest, student, admin, navigation, attendance, parking  
 
 `RepositoryHub` selects live backends via `AppConfig` (`useCloudflareApis`, `parkingUsesFirebase`).  
-Migration from Step 1 mocks: [`docs/09_STEP2_LIVE_BACKENDS.md`](docs/09_STEP2_LIVE_BACKENDS.md).
+Full code guide: [`docs/ARCHITECTURE_DETAILED.md`](docs/ARCHITECTURE_DETAILED.md).
+
 
 ### Run locally
 
@@ -179,14 +180,10 @@ The Flutter **Smart Parking** screen polls Firebase every few seconds so ESP upd
 
 | Doc | Content |
 |-----|---------|
-| [`docs/02_STEP1_DESIGN_ARCHITECTURE.md`](docs/02_STEP1_DESIGN_ARCHITECTURE.md) | Step 1 UI / architecture |
-| [`docs/03_CODE_AND_ARCHITECTURE_DETAILED.md`](docs/03_CODE_AND_ARCHITECTURE_DETAILED.md) | Flutter folder / repository deep dive |
-| [`docs/09_STEP2_LIVE_BACKENDS.md`](docs/09_STEP2_LIVE_BACKENDS.md) | **Mock → live Cloudflare/Firebase** (new files, flags) |
-| [`docs/08_CLASSROOM_SCANNER.md`](docs/08_CLASSROOM_SCANNER.md) | **Classroom QR reader** app (detailed) |
-| [`docs/04_CLOUDFLARE_ATTENDANCE_DB.md`](docs/04_CLOUDFLARE_ATTENDANCE_DB.md) | Attendance D1 |
-| [`docs/05_CLOUDFLARE_LOCATIONS_DB.md`](docs/05_CLOUDFLARE_LOCATIONS_DB.md) | Navigation D1 |
-| [`docs/06_CLOUDFLARE_USERS_DB.md`](docs/06_CLOUDFLARE_USERS_DB.md) | Users D1 |
-| [`docs/worker_results_tests.md`](docs/worker_results_tests.md) | Worker API test results |
+| [`docs/OVERVIEW.md`](docs/OVERVIEW.md) | **Simple** product overview (roles, apps, where data lives) |
+| [`docs/ARCHITECTURE_DETAILED.md`](docs/ARCHITECTURE_DETAILED.md) | **Full** architecture: files, flowcharts, Frontend, Scanner, Workers, IoT |
+| [`docs/sql/`](docs/sql/) | D1 SQL schemas (users, locations, attendance) |
+| [`docs/worker_results_tests.md`](docs/worker_results_tests.md) | Worker API test commands & results |
 | [`docs/07_ANDROID_WIRELESS_ADB.md`](docs/07_ANDROID_WIRELESS_ADB.md) | Run Flutter on a phone over Wi‑Fi ADB |
 
 ---

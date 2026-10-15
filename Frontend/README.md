@@ -3,21 +3,22 @@
   GitHub                      : https://github.com/IOTERRO
   Website                     : https://omarterro.fr
   Student (FYP)               : Khaled Othman
-  Date                        : 14 October 2026
   Project                     : SmartUni - Smart University CityU
 -->
-# Smart University (CityU) — Flutter app
+# Smart University (CityU) — Flutter app (`Frontend/`)
 
-Step 1: **professional structure + design screens** (mock data / no live backends yet).
+Main campus app: Guest / Student / Admin.  
+Live backends: Cloudflare Workers (auth, navigation, attendance) + Firebase parking.
 
 ## Run
 
-```bash
+```powershell
+# Copy lib/core/config/secrets.example.dart → secrets.dart and fill keys
 flutter pub get
-flutter run
+flutter run -d chrome --web-port=8090
 ```
 
-## Demo logins (design only)
+## Demo logins (D1 seed)
 
 | Role | Credentials |
 |------|-------------|
@@ -27,9 +28,11 @@ flutter run
 
 ## Docs
 
-- `docs/02_STEP1_DESIGN_ARCHITECTURE.md` — structure & screen map
-- `docs/01_FRONTEND_CODE_UNDERSTANDING.md` — old prototype notes
+- [`docs/OVERVIEW.md`](../docs/OVERVIEW.md) — simple product overview  
+- [`docs/ARCHITECTURE_DETAILED.md`](../docs/ARCHITECTURE_DETAILED.md) — full architecture & code guide  
+
+Classroom QR reader is a **separate** app: [`../ClassroomScanner/`](../ClassroomScanner/).
 
 ## Secrets
 
-Copy `lib/core/config/secrets.example.dart` → `secrets.dart` before Step 2 API wiring. Never commit real keys.
+Copy `lib/core/config/secrets.example.dart` → `secrets.dart`. Never commit real keys.

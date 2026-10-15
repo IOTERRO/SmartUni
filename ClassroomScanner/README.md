@@ -19,8 +19,7 @@ Separate Flutter app for the **classroom device**: admin signs in, picks an atte
 **Author / Project Supervisor:** Omar Terro ([IOTERRO](https://github.com/IOTERRO) · [omarterro.fr](https://omarterro.fr))  
 **Student (FYP):** Khaled Othman
 
-**Full documentation:** [`docs/08_CLASSROOM_SCANNER.md`](../docs/08_CLASSROOM_SCANNER.md)  
-**Step 2 (main app live backends):** [`docs/09_STEP2_LIVE_BACKENDS.md`](../docs/09_STEP2_LIVE_BACKENDS.md)
+**Docs:** [`docs/OVERVIEW.md`](../docs/OVERVIEW.md) (simple) · [`docs/ARCHITECTURE_DETAILED.md`](../docs/ARCHITECTURE_DETAILED.md) (full system + scanner)
 
 ---
 
@@ -68,7 +67,7 @@ Allow camera when prompted. Unmute the browser tab to hear success / fail beeps.
 
 Duplicate scans of the same QR text are ignored for 3 seconds. Expired `EXP` is rejected locally and by the Worker.
 
-If D1 lacks `created_at` on `attendance_records`, see the schema fix in [`docs/08_CLASSROOM_SCANNER.md`](../docs/08_CLASSROOM_SCANNER.md).
+If D1 lacks `created_at` on `attendance_records`, see the schema note in [`docs/ARCHITECTURE_DETAILED.md`](../docs/ARCHITECTURE_DETAILED.md) §5.5.
 
 ---
 
