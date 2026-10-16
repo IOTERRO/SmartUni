@@ -89,9 +89,11 @@ SmartUni/
 ├── README.md                  # This file
 ├── Frontend/                  # Flutter app (guest / student / admin)
 ├── ClassroomScanner/          # Flutter classroom QR reader (admin device)
-├── Backend/worker/            # Cloudflare Workers (users, navigation, attendance)
+├── Backend/
+│   ├── worker/                # Cloudflare Workers + API test log
+│   └── sql/                   # D1 schema SQL (source of truth)
 ├── iot/parking_node/          # ESP32 firmware → Firebase parking
-└── docs/                      # Architecture notes, D1 SQL, Worker test results
+└── docs/                      # OVERVIEW + ARCHITECTURE_DETAILED (+ ADB guide)
 ```
 
 ### Classroom scanner (`ClassroomScanner/`)
@@ -154,7 +156,7 @@ flutter run -d chrome --web-port=8090
 | Attendance | `https://smart-university.khaledothman750.workers.dev` | `smart-university-db` |
 
 All APIs expect header `X-API-Key` (stored as Worker secret `API_KEY`).  
-SQL schemas: `docs/sql/`. Test log: `docs/worker_results_tests.md`.
+SQL schemas: [`Backend/sql/`](Backend/sql/). Test log: [`Backend/worker/worker_results_tests.md`](Backend/worker/worker_results_tests.md).
 
 ---
 
@@ -182,8 +184,8 @@ The Flutter **Smart Parking** screen polls Firebase every few seconds so ESP upd
 |-----|---------|
 | [`docs/OVERVIEW.md`](docs/OVERVIEW.md) | **Simple** product overview (roles, apps, where data lives) |
 | [`docs/ARCHITECTURE_DETAILED.md`](docs/ARCHITECTURE_DETAILED.md) | **Full** architecture: files, flowcharts, Frontend, Scanner, Workers, IoT |
-| [`docs/sql/`](docs/sql/) | D1 SQL schemas (users, locations, attendance) |
-| [`docs/worker_results_tests.md`](docs/worker_results_tests.md) | Worker API test commands & results |
+| [`Backend/sql/`](Backend/sql/) | D1 SQL schemas (users, locations, attendance) |
+| [`Backend/worker/worker_results_tests.md`](Backend/worker/worker_results_tests.md) | Worker API test commands & results |
 | [`docs/07_ANDROID_WIRELESS_ADB.md`](docs/07_ANDROID_WIRELESS_ADB.md) | Run Flutter on a phone over Wi‑Fi ADB |
 
 ---

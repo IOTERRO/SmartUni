@@ -62,7 +62,7 @@ We use **three Workers** (three doors), each with its **own D1 database**:
 | `Backend/worker/navigation-worker.js` | `https://navigation.khaledothman750.workers.dev` | `cityu` | Campus places + walking edges |
 | `Backend/worker/attendance-worker.js` | `https://smart-university.khaledothman750.workers.dev` | `smart-university-db` | Courses, sessions, present/absent |
 
-SQL templates: `docs/sql/users_d1_schema.sql`, `locations_d1_schema.sql`, `attendance_d1_schema.sql`.
+SQL templates (source of truth): `Backend/sql/users_d1_schema.sql`, `locations_d1_schema.sql`, `attendance_d1_schema.sql`.
 
 ## A.2 What happens on one API call? (example: login)
 
@@ -677,8 +677,8 @@ Pins (typical): P1 TRIG/ECHO 13/14, P2 26/27, P3 32/33.
 | Path | Content |
 |------|---------|
 | [`OVERVIEW.md`](./OVERVIEW.md) | Short non-technical summary |
-| [`sql/`](./sql/) | Exact D1 `CREATE TABLE` scripts |
-| [`worker_results_tests.md`](./worker_results_tests.md) | Example curl / PowerShell API tests |
+| [`../Backend/sql/`](../Backend/sql/) | Exact D1 `CREATE TABLE` scripts |
+| [`../Backend/worker/worker_results_tests.md`](../Backend/worker/worker_results_tests.md) | Example curl / PowerShell API tests |
 | [`07_ANDROID_WIRELESS_ADB.md`](./07_ANDROID_WIRELESS_ADB.md) | Run Flutter on phone over Wi‑Fi |
 | `Backend/worker/*_README.md` | Per-Worker deploy notes |
 | `ClassroomScanner/README.md` | Scanner setup commands |

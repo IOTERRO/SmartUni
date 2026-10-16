@@ -29,7 +29,7 @@ Replace the current Worker code (API key only â†’ `"Access Granted!"`) with
 2. Delete the old script
 3. Paste the full contents of `smart-university-worker.js`
 4. **Save and Deploy**
-5. In D1 `cityu`, create `location_edges` (see `docs/sql/locations_d1_schema.sql`) so `/api/navigation` works
+5. In D1 `cityu`, create `location_edges` (see `Backend/sql/locations_d1_schema.sql`) so `/api/navigation` works
 
 ## Test with curl
 

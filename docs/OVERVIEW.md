@@ -90,7 +90,9 @@ QR text looks like: `SMARTUNI|SID:student|TOK:…|EXP:…`
 SmartUni/
 ├── Frontend/           Main campus app
 ├── ClassroomScanner/   QR reader app
-├── Backend/worker/     Cloudflare Worker scripts
+├── Backend/
+│   ├── worker/         Cloudflare Workers + API test log
+│   └── sql/            D1 schema scripts
 ├── iot/parking_node/   ESP32 firmware
 └── docs/               This overview + detailed architecture
 ```
@@ -104,5 +106,5 @@ Read **[`ARCHITECTURE_DETAILED.md`](./ARCHITECTURE_DETAILED.md)** — folders, e
 Practical extras:
 
 - Wireless phone debugging: [`07_ANDROID_WIRELESS_ADB.md`](./07_ANDROID_WIRELESS_ADB.md)  
-- D1 SQL schemas: [`sql/`](./sql/)  
-- Worker API test log: [`worker_results_tests.md`](./worker_results_tests.md)
+- D1 SQL schemas: [`../Backend/sql/`](../Backend/sql/)  
+- Worker API test log: [`../Backend/worker/worker_results_tests.md`](../Backend/worker/worker_results_tests.md)

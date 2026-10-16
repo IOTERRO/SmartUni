@@ -25,7 +25,7 @@ Source file: **`users-worker.js`**
 1. Open Worker **users** â†’ **Edit code**
 2. Replace everything with `users-worker.js`
 3. **Save and Deploy**
-4. In D1 database **users**, run `docs/sql/users_d1_schema.sql`
+4. In D1 database **users**, run `Backend/sql/users_d1_schema.sql`
 
 ## Test
 
@@ -67,4 +67,4 @@ curl -X DELETE -H "X-API-Key: YOUR_CLOUDFLARE_API_KEY" \
 | No CORS | CORS enabled for Flutter web |
 | No update | `PUT /api/users/:id` |
 
-Full system docs: `docs/OVERVIEW.md` · `docs/ARCHITECTURE_DETAILED.md` · schema `docs/sql/users_d1_schema.sql`
+Full system docs: `docs/OVERVIEW.md` · `docs/ARCHITECTURE_DETAILED.md` · schema `Backend/sql/users_d1_schema.sql` · API tests `Backend/worker/worker_results_tests.md`

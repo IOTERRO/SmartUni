@@ -493,7 +493,7 @@ async function findRoute(db, fromRaw, toRaw) {
       {
         success: false,
         error:
-          "Table location_edges not found. Create it using docs/sql/locations_d1_schema.sql",
+          "Table location_edges not found. Create it using Backend/sql/locations_d1_schema.sql",
       },
       503
     );

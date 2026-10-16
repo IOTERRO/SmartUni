@@ -6,7 +6,10 @@
   Date                        : 14 October 2026
   Project                     : SmartUni - Smart University CityU
 -->
-# Cloudflare Workers â€” Test Commands & Results
+# Cloudflare Workers — Test Commands & Results
+
+Lives next to the Workers under `Backend/worker/`.  
+Schemas: [`../sql/`](../sql/). System docs: [`../../docs/OVERVIEW.md`](../../docs/OVERVIEW.md) · [`../../docs/ARCHITECTURE_DETAILED.md`](../../docs/ARCHITECTURE_DETAILED.md).
 
 This document records the **PowerShell** tests run against the 3 SmartUni Workers  
 (company blocks `curl`, so we use `Invoke-RestMethod`).
